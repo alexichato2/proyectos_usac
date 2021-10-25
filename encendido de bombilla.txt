@@ -1,0 +1,26 @@
+import RPi.GPIO as gpio
+import time
+
+gpio.setwarnings(False)
+
+gpio.setmode(gpio.BOARD)
+
+var_1=15
+var_2=7
+
+gpio.setup(var_1,gpio.IN)
+gpio.setup(var_2,gpio.OUT)
+
+estado_var_2=0
+estadoanterior_var_2=0
+
+while 1:
+    lec_var_1 = gpio.input(var_1)
+    if(not lec_var_1)==1 and estadoanterior_var_2==0:
+        estado_var_2=1-estado_var_2
+        time.sleep(0.01)
+    estadoanterior_var_2= not lec_var_1
+    if estado_var_2==1:
+        gpio.output(var_2,1)
+    else:
+        gpio.output(var_2,0)

@@ -1,0 +1,22 @@
+import RPi.GPIO as gpio
+import time
+
+gpio.setwarnings(False)
+gpio.setmode(gpio.BOARD)
+
+gpio.setup(29,gpio.IN)
+gpio.setup(33,gpio.IN)
+gpio.setup(31,gpio.OUT)
+
+
+while 1:
+    buzzer=gpio.input(33)
+    boton_ap=gpio.input(29)
+    sonido=0
+    if buzzer==1 :
+        sonido=sonido+1
+        gpio.output(31,sonido)
+    else :
+        gpio.output(31,False)
+        time.sleep(1)
+        gpio.cleanup
