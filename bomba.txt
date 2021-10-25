@@ -1,0 +1,19 @@
+import RPi.GPIO as gpio
+import time
+
+gpio.setwarnings(False)
+gpio.setmode(gpio.BOARD)
+
+gpio.setup(11,gpio.IN)
+gpio.setup(32,gpio.OUT)
+
+
+while 1:
+    swch=gpio.input(11)
+    bomba=0
+    if swch==1 :
+        bomba=1
+        gpio.output(32,bomba)
+    else :
+        gpio.output(32,False)
+        gpio.cleanup
